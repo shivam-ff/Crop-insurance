@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title }} - Login</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body data-page="login">
+    <div class="container narrow">
+      <header class="topbar">
+        <div class="brand">
+          <div class="logo"></div>
+          <div>
+            <h1>{{ title }}</h1>
+            <p>Login (लॉगिन) to continue</p>
+          </div>
+        </div>
+      </header>
+
+      <div class="card">
+        <div class="cardHeader">
+          <div>
+            <h2>Login</h2>
+            <div class="hint">Use your registered phone and password.</div>
+          </div>
+        </div>
+        <div class="cardBody">
+          {% if error %}
+          <div class="pill bad block">{{ error }}</div>
+          {% endif %}
+
+          <form method="POST" action="/login" class="fieldGrid oneCol" autocomplete="on">
+            <div class="field">
+              <div class="label">Phone (फोन)</div>
+              <input name="phone" class="input" inputmode="numeric" placeholder="e.g. 9999999999" required />
+            </div>
+            <div class="field">
+              <div class="label">Password (पासवर्ड)</div>
+              <input name="password" class="input" type="password" placeholder="••••" required />
+            </div>
+            <button class="btn primary bigBtn" type="submit">Login</button>
+          </form>
+
+          <div class="row spaceBetween" style="margin-top: 12px;">
+            <a class="link" href="/signup">New user? Signup →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footerNote">
+        Built for Indian farmers • ₹ pricing • Live weather • Smart risk • Instant claim updates
+      </div>
+    </div>
+  </body>
+</html>
+

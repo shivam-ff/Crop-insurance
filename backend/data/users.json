@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "id": "cd80e6a6-122c-4a7c-95f6-6feeb792f65a",
+      "email": "shivamsawhney20@gmail.com",
+      "fullName": "shivam sawhney",
+      "walletAddress": "0xeB9FC3A095bB0cEFC3D4A53Ecb24639fceEd88b6",
+      "passwordHash": "$2b$10$gjNXBXBYkaQtkd2PzTQmvuUWupJWIVZOWPKP9yeeXunXovCLlWCRm",
+      "createdAt": "2026-04-22T16:27:53.553Z"
+    },
+    {
+      "id": "c6f03490-c6cc-4693-a8b6-e299abd7926b",
+      "email": "sawhney909@gmail.com",
+      "fullName": "shivam sawhney",
+      "walletAddress": "0xeb9fc3a095bb0cefc3d4a53ecb24639fceed88b6",
+      "passwordHash": "$2b$10$P9Raj0wh1HEg3DBpQwNXQelYqsuIvLgvfB6xiMSlAmMxDjBE3JXKG",
+      "createdAt": "2026-04-22T18:01:19.728Z"
+    },
+    {
+      "id": "2564120f-ee9d-488c-8c14-76e36dd720b1",
+      "email": "ujjwal@gmail.com",
+      "fullName": "shivam sawhney",
+      "walletAddress": "0xeb9fc3a095bb0cefc3d4a53ecb24639fceed88b6",
+      "passwordHash": "$2b$10$I1u8Jf.V9JoduAaifPVHMeZEWs3syk2gw0fRVO.QUnzrnrdoKOtUK",
+      "createdAt": "2026-04-22T18:08:07.111Z"
+    }
+  ]
+}

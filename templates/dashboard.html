@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title }} - Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body data-page="dashboard">
+    <div id="appShell" class="container">
+      <header class="topbar">
+        <div class="brand">
+          <div class="logo"></div>
+          <div>
+            <h1>{{ title }}</h1>
+            <p>Farmer Dashboard (किसान डैशबोर्ड)</p>
+          </div>
+        </div>
+        <div class="right">
+          <button id="btnConnect" class="btn">Connect Wallet</button>
+          <span id="walletBadge" class="pill">Wallet: Not connected</span>
+          <a class="btn" href="/logout">Logout</a>
+        </div>
+      </header>
+
+      <section class="grid">
+        <!-- Farmer info -->
+        <div class="card">
+          <div class="cardHeader">
+            <div>
+              <h2>🌾 Farmer Info (किसान जानकारी)</h2>
+              <div class="hint">Auto-detect farm location using browser GPS.</div>
+            </div>
+            <div class="row">
+              <span class="pill good">Welcome: {{ user.name }}</span>
+            </div>
+          </div>
+          <div class="cardBody">
+            <div class="kpiGrid twoCol">
+              <div class="kpi">
+                <div class="small">Name (नाम)</div>
+                <div class="big" id="nameVal">{{ user.name }}</div>
+              </div>
+              <div class="kpi">
+                <div class="small">Your Farm Location</div>
+                <div class="big mono" id="locVal">Detecting…</div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 12px;">
+              <button id="btnDetectLocation" class="btn primary bigBtn">Detect Location (लोकेशन)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Insurance plans -->
+        <div class="card">
+          <div class="cardHeader">
+            <div>
+              <h2>📄 Insurance Plans (₹)</h2>
+              <div class="hint">Choose a plan and activate coverage.</div>
+            </div>
+            <span id="policyBadge" class="pill warn">Policy: Not active</span>
+          </div>
+          <div class="cardBody">
+            <div class="plans" id="plans">
+              <div class="planCard" data-plan-card="basic">
+                <div class="planTop">
+                  <div class="planName">Basic Plan</div>
+                  <div class="planPrice">₹499</div>
+                </div>
+                <div class="planDesc">Good for small farms • basic drought cover</div>
+                <button class="btn primary bigBtn" data-buy-plan="basic">Buy Policy</button>
+              </div>
+              <div class="planCard" data-plan-card="standard">
+                <div class="planTop">
+                  <div class="planName">Standard Plan</div>
+                  <div class="planPrice">₹999</div>
+                </div>
+                <div class="planDesc">Best value • season coverage • faster support</div>
+                <button class="btn primary bigBtn" data-buy-plan="standard">Buy Policy</button>
+              </div>
+              <div class="planCard" data-plan-card="premium">
+                <div class="planTop">
+                  <div class="planName">Premium Plan</div>
+                  <div class="planPrice">₹1999</div>
+                </div>
+                <div class="planDesc">Maximum cover • ideal for high-risk areas</div>
+                <button class="btn primary bigBtn" data-buy-plan="premium">Buy Policy</button>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <button id="btnStatus" class="btn">Check Claim Status</button>
+              <span class="pill">Payment (भुगतान): Successful ✅</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weather + IoT -->
+        <div class="card">
+          <div class="cardHeader">
+            <div>
+              <h2>🌦️ Weather (IoT) Panel</h2>
+              <div class="hint">Rainfall (बारिश) + Temperature live updates.</div>
+            </div>
+            <button id="btnAuto" class="btn">Auto Mode: OFF</button>
+          </div>
+          <div class="cardBody">
+            <div class="kpiGrid threeCol">
+              <div class="kpi">
+                <div class="small">Rainfall (बारिश)</div>
+                <div class="big"><span id="rainfallVal">—</span> <span class="unit">mm</span></div>
+              </div>
+              <div class="kpi">
+                <div class="small">Temperature (तापमान)</div>
+                <div class="big"><span id="tempVal">—</span> <span class="unit">°C</span></div>
+              </div>
+              <div class="kpi">
+                <div class="small">Risk Level (जोखिम स्तर)</div>
+                <div id="riskVal" class="riskBadge">—</div>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 12px;">
+              <button id="btnDrought" class="btn bigBtn">Simulate Drought → 10mm</button>
+              <button id="btnNormal" class="btn bigBtn">Normal Rainfall → 40mm</button>
+              <button id="btnHeavy" class="btn bigBtn">Heavy Rainfall → 100mm</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Claim / payout -->
+        <div class="card claimCard">
+          <div class="cardHeader">
+            <div>
+              <h2>💰 Claim & Payment (क्लेम / भुगतान)</h2>
+              <div class="hint">Automatic payout triggers when drought risk is HIGH.</div>
+            </div>
+          </div>
+          <div class="cardBody">
+            <div id="claimBox" class="claimBox">
+              <div class="claimTitle">Status</div>
+              <div id="claimMsg" class="claimMsg">No claim yet.</div>
+              <div id="claimSub" class="claimSub">Try drought simulation to trigger payout.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Journey timeline (startup touch) -->
+        <div class="card">
+          <div class="cardHeader">
+            <div>
+              <h2>✅ Journey (प्रक्रिया)</h2>
+              <div class="hint">See your policy journey step-by-step.</div>
+            </div>
+          </div>
+          <div class="cardBody">
+            <div id="timeline" class="timeline">
+              <div class="step" data-step="1">
+                <div class="dot"></div>
+                <div class="meta">
+                  <div class="title">Policy Active</div>
+                  <div class="sub">Coverage started</div>
+                </div>
+              </div>
+              <div class="step" data-step="2">
+                <div class="dot"></div>
+                <div class="meta">
+                  <div class="title">Monitoring</div>
+                  <div class="sub">Weather data (IoT)</div>
+                </div>
+              </div>
+              <div class="step" data-step="3">
+                <div class="dot"></div>
+                <div class="meta">
+                  <div class="title">Risk Detected</div>
+                  <div class="sub">Drought alert</div>
+                </div>
+              </div>
+              <div class="step" data-step="4">
+                <div class="dot"></div>
+                <div class="meta">
+                  <div class="title">Claim Paid</div>
+                  <div class="sub">₹5000 credited</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" style="margin-top: 14px;">
+        <div class="cardHeader">
+          <div>
+            <h2>📜 Activity (गतिविधि)</h2>
+            <div class="hint">Live updates for your policy, weather, and claim.</div>
+          </div>
+          <div class="row">
+            <button id="btnClearLogs" class="btn">Clear Logs</button>
+          </div>
+        </div>
+        <div class="cardBody">
+          <pre id="logs" class="logs"></pre>
+        </div>
+      </section>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+    <div id="confetti" class="confetti" aria-hidden="true"></div>
+    <script src="/static/script.js"></script>
+  </body>
+</html>
+

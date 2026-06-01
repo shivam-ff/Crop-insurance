@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title }} - Signup</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body data-page="signup">
+    <div class="container narrow">
+      <header class="topbar">
+        <div class="brand">
+          <div class="logo"></div>
+          <div>
+            <h1>{{ title }}</h1>
+            <p>Create account (खाता बनाएं)</p>
+          </div>
+        </div>
+      </header>
+
+      <div class="card">
+        <div class="cardHeader">
+          <div>
+            <h2>Signup</h2>
+            <div class="hint">No database — stored in memory for demo.</div>
+          </div>
+        </div>
+        <div class="cardBody">
+          {% if error %}
+          <div class="pill bad block">{{ error }}</div>
+          {% endif %}
+
+          <form method="POST" action="/signup" class="fieldGrid oneCol" autocomplete="on">
+            <div class="field">
+              <div class="label">Name (नाम)</div>
+              <input name="name" class="input" placeholder="e.g. Sita Devi" required />
+            </div>
+            <div class="field">
+              <div class="label">Phone (फोन)</div>
+              <input name="phone" class="input" inputmode="numeric" placeholder="e.g. 9876543210" required />
+            </div>
+            <div class="field">
+              <div class="label">Password (पासवर्ड)</div>
+              <input name="password" class="input" type="password" placeholder="min 4 chars" required />
+            </div>
+            <button class="btn primary bigBtn" type="submit">Create Account</button>
+          </form>
+
+          <div class="row spaceBetween" style="margin-top: 12px;">
+            <a class="link" href="/login">Already have account? Login →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footerNote">
+        Your details are safe on this device session.
+      </div>
+    </div>
+  </body>
+</html>
+
